@@ -45,16 +45,19 @@ src="https://www.facebook.com/tr?id=704845828599877&ev=PageView&noscript=1"
     fbq('track', 'Purchase', {currency: "THB", value: 50.00});
   </script>
 
-
-  <a id="menuButton" href="#">OUR MENU HERE!!!</a>
-
-<script type="text/javascript">
-  $('#menuButton').click(function() {
+<body>
+<a href="#" class="track-purchase">OUR MENU HERE!!!</a>
+<script>
+document.querySelector('.track-purchase').addEventListener('click', function(event) {
+  event.preventDefault();
+  if (typeof fbq !== 'undefined') {
     fbq('track', 'Purchase', {
       currency: "USD",
-      value: 30.00
+      value: 30.00,
+      content_name: "Strewbery Ice Cream"
     });
-  });
+  }
+  setTimeout(() => { window.location.href = "URL_หน้าสั่งซื้อ"; }, 300);
+});
 </script>
-  ...
 </body>
