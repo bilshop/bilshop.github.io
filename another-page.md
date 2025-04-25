@@ -5,7 +5,7 @@ layout: default
 ## Welcome to another page
 
 Thank you for interesting 
-![Ice Cream](https://pngtree.com/freepng/strawberry-ice-cream-cone_14884798.html)
+![Ice Cream](file:///C:/Users/shabil/Downloads/pngtree-strawberry-ice-cream-cone-png-image_14884798.png)
 50 บาท
 
 [back](./)
