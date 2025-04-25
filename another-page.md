@@ -5,7 +5,7 @@ layout: default
 ## Welcome to another page
 
 Thank you for interesting 
-https://en.wikipedia.org/wiki/Strawberry_ice_cream#/media/File:Strawberry_ice_cream_cone_(5076899310).jpg
+![Octocat](https://en.wikipedia.org/wiki/Strawberry_ice_cream#/media/File:Strawberry_ice_cream_cone_(5076899310).jpg)
 50 บาท
 
 [back](./)
