@@ -46,10 +46,14 @@ src="https://www.facebook.com/tr?id=704845828599877&ev=PageView&noscript=1"
   </script>
 
 
-  <button id="OUR MENU HERE!!!">Purchase</button>
+  <a id="menuButton" href="#">OUR MENU HERE!!!</a>
+
 <script type="text/javascript">
-  $('#OUR MENU HERE!!!').click(function() {
-    fbq('track', 'Purchase', {currency: "THB", value: 30.00});
+  $('#menuButton').click(function() {
+    fbq('track', 'Purchase', {
+      currency: "USD",
+      value: 30.00
+    });
   });
 </script>
   ...
