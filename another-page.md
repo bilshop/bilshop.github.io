@@ -11,7 +11,7 @@ layout: default
 
 ### 50 บาท
 
-[back](./)
+
 
 
 <head>
@@ -61,3 +61,7 @@ document.querySelector('.track-purchase').addEventListener('click', function(eve
 });
 </script>
 </body>
+
+
+
+[back](./)
