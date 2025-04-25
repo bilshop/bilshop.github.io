@@ -5,7 +5,7 @@ layout: default
 ## Welcome to another page
 
 Thank you for interesting 
-![Ice Cream](https://en.wikipedia.org/wiki/Strawberry_ice_cream#/media/File:Strawberry_ice_cream_cone_(5076899310).jpg)
+![Ice Cream](https://pngtree.com/freepng/strawberry-ice-cream-cone_14884798.html)
 50 บาท
 
 [back](./)
