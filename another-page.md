@@ -5,6 +5,9 @@ layout: default
 ## Welcome to another page
 
 Thank you for interesting 
+###Strewbery Ice Cream 
+
+
 ![Image](https://github.com/user-attachments/assets/9f56805b-bbe7-405f-8b74-a81a6ab470bd)
 
 
