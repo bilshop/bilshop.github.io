@@ -2,7 +2,7 @@
 layout: default
 ---
 
-Thank you for interesting 
+# OUR MENU HERE
 ## Strewbery Ice Cream 
 
 
