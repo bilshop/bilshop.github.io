@@ -38,3 +38,11 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=704845828599877&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+
+<body>
+  ...
+  <script>
+    fbq('track', 'Purchase', {currency: "THB", value: 50.00});
+  </script>
+  ...
+</body>
