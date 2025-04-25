@@ -46,7 +46,7 @@ src="https://www.facebook.com/tr?id=704845828599877&ev=PageView&noscript=1"
   </script>
 
 <body>
-<a href="#" class="track-purchase">OUR MENU HERE!!!</a>
+<a href="#" class="track-purchase">BUY NOW</a>
 <script>
 document.querySelector('.track-purchase').addEventListener('click', function(event) {
   event.preventDefault();
