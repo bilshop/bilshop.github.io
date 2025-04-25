@@ -28,8 +28,6 @@ src="https://www.facebook.com/tr?id=704845828599877&ev=PageView&noscript=1"
 
 *Architect is a Jekyll theme for GitHub Pages. You can [preview the theme to see what it looks like](http://pages-themes.github.io/architect), or even [use it today](#usage).*
 
-![Thumbnail of Architect](thumbnail.png)
-
 ## Usage
 
 To use the Architect theme:
@@ -84,13 +82,6 @@ If you'd like to add your own custom styles:
 
 ### Layouts
 
-If you'd like to change the theme's HTML layout:
-
-1. For some changes such as a custom `favicon`, you can add custom files in your local `_includes` folder. The files [provided with the theme](https://github.com/pages-themes/architect/tree/master/_includes) provide a starting point and are included by the [original layout template](https://github.com/pages-themes/architect/blob/master/_layouts/default.html).
-2. For more extensive changes, [copy the original template](https://github.com/pages-themes/architect/blob/master/_layouts/default.html) from the theme's repository<br />(*Pro-tip: click "raw" to make copying easier*)
-3. Create a file called `/_layouts/default.html` in your site
-4. Paste the default layout content copied in the first step
-5. Customize the layout as you'd like
 
 ### Customizing Google Analytics code
 
