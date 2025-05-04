@@ -57,11 +57,11 @@ document.querySelector('.track-purchase').addEventListener('click', function(eve
       content_name: "Strewbery Ice Cream"
     });
   }
-  setTimeout(() => { window.location.href = "URL_หน้าสั่งซื้อ"; }, 300);
+  setTimeout(() => { window.location.href = "URL_Checkout"; }, 300);
 });
 </script>
 </body>
 
 
 
-[back](./)
+[Back](./)
