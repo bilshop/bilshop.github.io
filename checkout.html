@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bil Shop - Checkout</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffef8;
+      margin: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #0099cc;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    nav {
+      background: #0077aa;
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0099cc;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #0099cc;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f4f4f4;
+      margin-top: 50px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Checkout</h1>
+    <p>Review and complete your order</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <div class="container">
+    <h2>Order Summary</h2>
+    <p><strong>Product:</strong> <span id="productName">Loading...</span></p>
+    <p><strong>Price:</strong> $<span id="productPrice">--</span></p>
+
+    <form onsubmit="return submitOrder();">
+      <label for="customerName">Your Name</label>
+      <input type="text" id="customerName" required>
+
+      <label for="customerAddress">Shipping Address</label>
+      <textarea id="customerAddress" rows="4" required></textarea>
+
+      <label for="customerPhone">Phone Number</label>
+      <input type="text" id="customerPhone" required>
+
+      <button type="submit">Submit Order</button>
+    </form>
+  </div>
+
+  <footer>
+    📍 Bil Shop Ice Cream | 📧 bilshop@example.com | 📞 012-3456789
+  </footer>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const product = urlParams.get('product') || 'Not specified';
+    const price = urlParams.get('price') || '0.00';
+
+    document.getElementById('productName').textContent = product;
+    document.getElementById('productPrice').textContent = price;
+
+    function submitOrder() {
+      const name = document.getElementById('customerName').value;
+      const address = document.getElementById('customerAddress').value;
+      const phone = document.getElementById('customerPhone').value;
+
+      if (!name || !address || !phone) {
+        alert("Please fill in all fields.");
+        return false;
+      }
+
+      const message = `
+Thank you for your order, ${name}!
+
+✅ Order Details:
+Product: ${product}
+Price: $${price}
+Shipping Address: ${address}
+Phone: ${phone}
+
+We will contact you shortly to confirm your delivery.
+      `;
+
+      alert(message);
+      window.location.href = "index.html";
+      return false;
+    }
+  </script>
+
+</body>
+</html>
