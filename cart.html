@@ -113,51 +113,70 @@
     🍦 Bil Shop © 2025 | 📧 bilshop@example.com | 📞 012-3456789
   </footer>
 
-  <script>
+ <script>
+  function renderCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const container = document.getElementById('cartContainer');
 
     if (cart.length === 0) {
       container.innerHTML = '<div class="empty">🛒 Your cart is empty.</div>';
-    } else {
-      let total = 0;
-      let tableHTML = `
-        <table>
-          <thead>
-            <tr><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th></tr>
-          </thead>
-          <tbody>
-      `;
+      return;
+    }
 
-      cart.forEach(item => {
-        const subtotal = item.price * item.quantity;
-        total += subtotal;
-        tableHTML += `
+    let total = 0;
+    let tableHTML = `
+      <table>
+        <thead>
           <tr>
-            <td>${item.name}</td>
-            <td>$${item.price.toFixed(2)}</td>
-            <td>${item.quantity}</td>
-            <td>$${subtotal.toFixed(2)}</td>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Subtotal</th>
+            <th></th>
           </tr>
-        `;
-      });
+        </thead>
+        <tbody>
+    `;
 
+    cart.forEach((item, index) => {
+      const subtotal = item.price * item.quantity;
+      total += subtotal;
       tableHTML += `
-          </tbody>
-        </table>
-        <div class="total"><strong>Total: $${total.toFixed(2)}</strong></div>
-        <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+        <tr>
+          <td>${item.name}</td>
+          <td>$${item.price.toFixed(2)}</td>
+          <td>${item.quantity}</td>
+          <td>$${subtotal.toFixed(2)}</td>
+          <td><button onclick="removeFromCart(${index})" style="background:#cc0000;color:white;border:none;padding:6px 10px;border-radius:5px;cursor:pointer;">🗑</button></td>
+        </tr>
       `;
+    });
 
-      container.innerHTML = tableHTML;
-    }
+    tableHTML += `
+        </tbody>
+      </table>
+      <div class="total"><strong>Total: $${total.toFixed(2)}</strong></div>
+      <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+    `;
 
-    function goToCheckout() {
-      // Send total price to checkout.html
-      const params = new URLSearchParams({ cart: 'true' });
-      window.location.href = 'checkout.html?' + params.toString();
-    }
-  </script>
+    container.innerHTML = tableHTML;
+  }
+
+  function removeFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart(); // re-render cart
+  }
+
+  function goToCheckout() {
+    const params = new URLSearchParams({ cart: 'true' });
+    window.location.href = 'checkout.html?' + params.toString();
+  }
+
+  // Run when page loads
+  renderCart();
+</script>
 
 </body>
 </html>
