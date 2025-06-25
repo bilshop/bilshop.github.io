@@ -33,7 +33,7 @@
     }
 
     .container {
-      max-width: 600px;
+      max-width: 700px;
       margin: 40px auto;
       background: white;
       padding: 30px;
@@ -72,6 +72,23 @@
       width: 100%;
     }
 
+    .summary {
+      margin-bottom: 30px;
+      padding: 10px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .summary p {
+      margin: 5px 0;
+    }
+
+    .total {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 15px;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -91,14 +108,13 @@
   <nav>
     <a href="index.html">Home</a>
     <a href="shop.html">Shop</a>
-    <a href="checkout.html">Checkout</a>
+    <a href="cart.html">Cart</a>
     <a href="about.html">About</a>
   </nav>
 
   <div class="container">
     <h2>Order Summary</h2>
-    <p><strong>Product:</strong> <span id="productName">Loading...</span></p>
-    <p><strong>Price:</strong> $<span id="productPrice">--</span></p>
+    <div id="orderSummary" class="summary">Loading...</div>
 
     <form onsubmit="return submitOrder();">
       <label for="customerName">Your Name</label>
@@ -115,16 +131,39 @@
   </div>
 
   <footer>
-    📍 Bil Shop Ice Cream | 📧 bilshop@example.com | 📞 012-3456789
+    🍦 Bil Shop © 2025 | 📧 bilshop@example.com | 📞 012-3456789
   </footer>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const product = urlParams.get('product') || 'Not specified';
-    const price = urlParams.get('price') || '0.00';
+    const fromCart = urlParams.get('cart') === 'true';
+    const summaryDiv = document.getElementById('orderSummary');
 
-    document.getElementById('productName').textContent = product;
-    document.getElementById('productPrice').textContent = price;
+    let orderItems = [];
+    let total = 0;
+
+    if (fromCart) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart.length === 0) {
+        summaryDiv.innerHTML = "<p>Your cart is empty.</p>";
+      } else {
+        let html = "";
+        cart.forEach(item => {
+          const subtotal = item.price * item.quantity;
+          total += subtotal;
+          orderItems.push(`${item.name} x${item.quantity}`);
+          html += `<p>${item.name} x${item.quantity} — $${subtotal.toFixed(2)}</p>`;
+        });
+        html += `<p class="total">Total: $${total.toFixed(2)}</p>`;
+        summaryDiv.innerHTML = html;
+      }
+    } else {
+      const product = urlParams.get('product') || 'Not specified';
+      const price = parseFloat(urlParams.get('price')) || 0;
+      total = price;
+      orderItems.push(`${product} x1`);
+      summaryDiv.innerHTML = `<p>${product} x1 — $${price.toFixed(2)}</p><p class="total">Total: $${price.toFixed(2)}</p>`;
+    }
 
     function submitOrder() {
       const name = document.getElementById('customerName').value;
@@ -140,15 +179,20 @@
 Thank you for your order, ${name}!
 
 ✅ Order Details:
-Product: ${product}
-Price: $${price}
+Items: ${orderItems.join(', ')}
+Total Price: $${total.toFixed(2)}
 Shipping Address: ${address}
 Phone: ${phone}
 
 We will contact you shortly to confirm your delivery.
       `;
-
       alert(message);
+
+      // Clear cart if user came from it
+      if (fromCart) {
+        localStorage.removeItem('cart');
+      }
+
       window.location.href = "index.html";
       return false;
     }
