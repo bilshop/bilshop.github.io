@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bil Shop - Ice Cream</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fffaf5;
+    }
+
+    header {
+      background: #ff69b4;
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .container {
+      padding: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      width: 250px;
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .product h3 {
+      color: #ff69b4;
+      margin: 10px 0 5px;
+    }
+
+    .product p {
+      margin: 5px 0;
+    }
+
+    .product button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #cart {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 200px;
+    }
+
+    #cart h2 {
+      font-size: 18px;
+      margin-top: 0;
+    }
+
+    #cart ul {
+      padding-left: 20px;
+      list-style: disc;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    #checkoutBtn {
+      margin-top: 10px;
+      background-color: green;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #ffe3ec;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Bil Shop - Ice Cream</h1>
+  <p>Fresh & Delicious Homemade Ice Cream</p>
+</header>
+
+<div class="container">
+  <div class="product">
+    <img src="https://source.unsplash.com/250x150/?icecream,chocolate" alt="Chocolate Ice Cream">
+    <h3>Chocolate Heaven</h3>
+    <p>$5.00</p>
+    <button onclick="addToCart('Chocolate Heaven - $5.00')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="https://source.unsplash.com/250x150/?icecream,strawberry" alt="Strawberry Ice Cream">
+    <h3>Strawberry Bliss</h3>
+    <p>$5.00</p>
+    <button onclick="addToCart('Strawberry Bliss - $5.00')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="https://source.unsplash.com/250x150/?icecream,vanilla" alt="Vanilla Ice Cream">
+    <h3>Vanilla Classic</h3>
+    <p>$4.50</p>
+    <button onclick="addToCart('Vanilla Classic - $4.50')">Add to Cart</button>
+  </div>
+</div>
+
+<div id="cart">
+  <h2>🛒 Your Cart</h2>
+  <ul id="cartList"></ul>
+  <button id="checkoutBtn" onclick="checkout()">Checkout</button>
+</div>
+
+<footer>
+  📞 012-3456789 | 📧 bilshop@example.com
+</footer>
+
+<script>
+  const cart = [];
+
+  function addToCart(item) {
+    cart.push(item);
+    renderCart();
+  }
+
+  function renderCart() {
+    const list = document.getElementById('cartList');
+    list.innerHTML = '';
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.innerText = item;
+      list.appendChild(li);
+    });
+  }
+
+  function checkout() {
+    if (cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+    let message = 'Thank you for your order!\n\nYour Cart:\n';
+    message += cart.join('\n');
+    alert(message);
+
+    // Optional: Open WhatsApp
+    // window.open(`https://wa.me/60123456789?text=${encodeURIComponent(message)}`, '_blank');
+
+    // Reset cart
+    cart.length = 0;
+    renderCart();
+  }
+</script>
+
+</body>
+</html>
