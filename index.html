@@ -3,178 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bil Shop - Ice Cream</title>
+  <title>Bil Shop - Home</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fffaf5;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff6e5;
+      color: #333;
     }
 
     header {
-      background: #ff69b4;
+      background-color: #0099cc;
       color: white;
-      padding: 30px;
       text-align: center;
+      padding: 50px 20px;
     }
 
-    h1 {
+    header h1 {
+      font-size: 48px;
       margin: 0;
     }
 
-    .container {
-      padding: 30px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .product {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 15px;
-      width: 250px;
-      text-align: center;
-    }
-
-    .product img {
-      width: 100%;
-      border-radius: 8px;
-    }
-
-    .product h3 {
-      color: #ff69b4;
-      margin: 10px 0 5px;
-    }
-
-    .product p {
-      margin: 5px 0;
-    }
-
-    .product button {
-      background-color: #ff69b4;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    #cart {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: white;
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 200px;
-    }
-
-    #cart h2 {
+    header p {
       font-size: 18px;
-      margin-top: 0;
-    }
-
-    #cart ul {
-      padding-left: 20px;
-      list-style: disc;
-      max-height: 150px;
-      overflow-y: auto;
-    }
-
-    #checkoutBtn {
       margin-top: 10px;
-      background-color: green;
+    }
+
+    nav {
+      background: #0077aa;
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    section h2 {
+      font-size: 32px;
+      color: #0099cc;
     }
 
     footer {
+      background-color: #f4f4f4;
       text-align: center;
       padding: 20px;
-      background: #ffe3ec;
-      margin-top: 40px;
+      font-size: 14px;
+      margin-top: 50px;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Bil Shop - Ice Cream</h1>
-  <p>Fresh & Delicious Homemade Ice Cream</p>
-</header>
+  <header>
+    <h1>Welcome to Bil Shop</h1>
+    <p>Delicious homemade ice cream made with love</p>
+  </header>
 
-<div class="container">
-  <div class="product">
-    <img src="https://source.unsplash.com/250x150/?icecream,chocolate" alt="Chocolate Ice Cream">
-    <h3>Chocolate Heaven</h3>
-    <p>$5.00</p>
-    <button onclick="addToCart('Chocolate Heaven - $5.00')">Add to Cart</button>
-  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="about.html">About</a>
+  </nav>
 
-  <div class="product">
-    <img src="https://source.unsplash.com/250x150/?icecream,strawberry" alt="Strawberry Ice Cream">
-    <h3>Strawberry Bliss</h3>
-    <p>$5.00</p>
-    <button onclick="addToCart('Strawberry Bliss - $5.00')">Add to Cart</button>
-  </div>
+  <section>
+    <h2>Fresh. Local. Irresistible.</h2>
+    <p>Browse our shop to discover delicious ice cream flavors that are made daily and delivered to your door.</p>
+  </section>
 
-  <div class="product">
-    <img src="https://source.unsplash.com/250x150/?icecream,vanilla" alt="Vanilla Ice Cream">
-    <h3>Vanilla Classic</h3>
-    <p>$4.50</p>
-    <button onclick="addToCart('Vanilla Classic - $4.50')">Add to Cart</button>
-  </div>
-</div>
-
-<div id="cart">
-  <h2>🛒 Your Cart</h2>
-  <ul id="cartList"></ul>
-  <button id="checkoutBtn" onclick="checkout()">Checkout</button>
-</div>
-
-<footer>
-  📞 012-3456789 | 📧 bilshop@example.com
-</footer>
-
-<script>
-  const cart = [];
-
-  function addToCart(item) {
-    cart.push(item);
-    renderCart();
-  }
-
-  function renderCart() {
-    const list = document.getElementById('cartList');
-    list.innerHTML = '';
-    cart.forEach(item => {
-      const li = document.createElement('li');
-      li.innerText = item;
-      list.appendChild(li);
-    });
-  }
-
-  function checkout() {
-    if (cart.length === 0) {
-      alert('Your cart is empty!');
-      return;
-    }
-    let message = 'Thank you for your order!\n\nYour Cart:\n';
-    message += cart.join('\n');
-    alert(message);
-
-    // Optional: Open WhatsApp
-    // window.open(`https://wa.me/60123456789?text=${encodeURIComponent(message)}`, '_blank');
-
-    // Reset cart
-    cart.length = 0;
-    renderCart();
-  }
-</script>
+  <footer>
+    📍 Bil Shop Ice Cream | 📧 bilshop@example.com | 📞 012-3456789
+  </footer>
 
 </body>
 </html>
