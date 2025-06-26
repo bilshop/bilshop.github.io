@@ -3,200 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bil Shop - Ice Cream Menu</title>
-  <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '704845828599877');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=704845828599877&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+  <title>Bil Shop - Ice Cream</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #fffef8;
-      color: #333;
-    }
-
-    header {
-      background-color: #0099cc;
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    nav {
-      background: #0077aa;
-      text-align: center;
-      padding: 15px 0;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 40px 20px;
-      gap: 30px;
-    }
-
+    body { font-family: sans-serif; background: #fffef8; margin: 0; }
+    header, nav, footer { text-align: center; background: #0099cc; color: white; padding: 20px; }
+    nav { background: #0077aa; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; }
+    .products { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
     .product {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 20px;
-      max-width: 250px;
-      text-align: center;
+      border: 1px solid #ddd; border-radius: 10px; margin: 10px;
+      padding: 15px; width: 250px; text-align: center; background: #fff;
     }
-
-    .product img {
-      width: 100%;
-      border-radius: 8px;
-    }
-
-    .product h3 {
-      margin: 15px 0 10px;
-      color: #0099cc;
-    }
-
-    .product p {
-      font-size: 14px;
-      margin: 5px 0;
-    }
-
-    .product button {
-      margin-top: 10px;
-      background-color: #0099cc;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    footer {
-      background-color: #f4f4f4;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      margin-top: 50px;
-    }
+    .product img { width: 100%; border-radius: 10px; }
+    input[type="number"] { width: 50px; margin: 10px 0; }
+    button { background: #0099cc; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; }
   </style>
 </head>
-
 <body>
 
-  <header>
-    <h1>Our Ice Cream</h1>
-    <p>Choose your favorite flavor and place an order today!</p>
-  </header>
+<header>
+  <h1>Bil Shop</h1>
+  <p>Fresh Ice Cream Delivered to You!</p>
+</header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="checkout.html">Checkout</a>
-    <a href="about.html">About</a>
-  </nav>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="cart.html">Cart</a>
+</nav>
 
-  <div class="products">
+<div class="products">
+  <!-- Example Product -->
   <div class="product">
-    <img src="https://images.unsplash.com/photo-1601924582975-7e1eaf77a5ad?auto=format&fit=crop&w=400&q=80" alt="Chocolate Ice Cream">
+    <img src="https://images.unsplash.com/photo-1601924582975-7e1eaf77a5ad?auto=format&fit=crop&w=400&q=80" alt="Chocolate">
     <h3>Chocolate Heaven</h3>
     <p>$5.00</p>
-    <label for="qty-choco">Qty:</label>
-  <input type="number" id="qty-choco" min="1" value="1">
-  <button onclick="addToCart('Chocolate Heaven', 5.00, document.getElementById('qty-choco').value)">Add to Cart</button>
+    <input type="number" id="qty1" min="1" value="1">
+    <button onclick="addToCart('Chocolate Heaven', 5.00, 'qty1')">Add to Cart</button>
+  </div>
+  <!-- Repeat for more flavors... -->
 </div>
 
-  <div class="product">
-    <img src="https://images.unsplash.com/photo-1590080875976-7fc47c699f5e?auto=format&fit=crop&w=400&q=80" alt="Strawberry Ice Cream">
-    <h3>Strawberry Bliss</h3>
-    <p>$5.00</p>
-   <label for="qty-choco">Qty:</label>
-  <input type="number" id="qty-choco" min="1" value="1">
-  <button onclick="addToCart('Chocolate Heaven', 5.00, document.getElementById('qty-choco').value)">Add to Cart</button>
-</div>
+<footer>© 2025 Bil Shop</footer>
 
-  <div class="product">
-    <img src="https://images.unsplash.com/photo-1589712234963-457b6e99f5e4?auto=format&fit=crop&w=400&q=80" alt="Vanilla Ice Cream">
-    <h3>Vanilla Classic</h3>
-    <p>$4.50</p>
-    <label for="qty-choco">Qty:</label>
-  <input type="number" id="qty-choco" min="1" value="1">
-  <button onclick="addToCart('Chocolate Heaven', 5.00, document.getElementById('qty-choco').value)">Add to Cart</button>
-</div>
-
-  <div class="product">
-    <img src="https://images.unsplash.com/photo-1627833334942-01937b8a04aa?auto=format&fit=crop&w=400&q=80" alt="Mint Chip Ice Cream">
-    <h3>Mint Chip Delight</h3>
-    <p>$5.00</p>
-    <label for="qty-choco">Qty:</label>
-  <input type="number" id="qty-choco" min="1" value="1">
-  <button onclick="addToCart('Chocolate Heaven', 5.00, document.getElementById('qty-choco').value)">Add to Cart</button>
-</div>
-
-  <div class="product">
-    <img src="https://images.unsplash.com/photo-1589710751765-99a3bb08f4b0?auto=format&fit=crop&w=400&q=80" alt="Mango Ice Cream">
-    <h3>Mango Tango</h3>
-    <p>$5.50</p>
-     <label for="qty-choco">Qty:</label>
-  <input type="number" id="qty-choco" min="1" value="1">
-  <button onclick="addToCart('Chocolate Heaven', 5.00, document.getElementById('qty-choco').value)">Add to Cart</button>
-</div>
-
-  <div class="product">
-    <img src="https://images.unsplash.com/photo-1590080875976-1b4ae45b2c17?auto=format&fit=crop&w=400&q=80" alt="Coffee Ice Cream">
-    <h3>Coffee Caramel Crunch</h3>
-    <p>$6.00</p>
-    <label for="qty-choco">Qty:</label>
-  <input type="number" id="qty-choco" min="1" value="1">
-  <button onclick="addToCart('Chocolate Heaven', 5.00, document.getElementById('qty-choco').value)">Add to Cart</button>
-</div>
-</div>
-
-  <footer>
-    📍 Bil Shop Ice Cream | 📧 bilshop@example.com | 📞 012-3456789
-  </footer>
-
-  <script>
-    function buyNow(productName, price) {
-      const checkoutURL = `checkout.html?product=${encodeURIComponent(productName)}&price=${encodeURIComponent(price)}`;
-      window.location.href = checkoutURL;
-    }
-  </script>
 <script>
-function addToCart(productName, price, quantity) {
+function addToCart(name, price, qtyId) {
+  const quantity = parseInt(document.getElementById(qtyId).value);
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  quantity = parseInt(quantity);
-
-  // If product exists, update quantity
-  const index = cart.findIndex(item => item.name === productName);
-  if (index > -1) {
+  const index = cart.findIndex(item => item.name === name);
+  if (index >= 0) {
     cart[index].quantity += quantity;
   } else {
-    cart.push({ name: productName, price: price, quantity: quantity });
+    cart.push({ name, price, quantity });
   }
-
   localStorage.setItem('cart', JSON.stringify(cart));
-  alert(`${productName} added to cart (${quantity})`);
+  alert(`${name} (${quantity}) added to cart`);
 }
 </script>
+
 </body>
 </html>
