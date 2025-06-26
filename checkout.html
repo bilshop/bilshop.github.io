@@ -2,201 +2,81 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bil Shop - Checkout</title>
+  <title>Checkout - Bil Shop</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fffef8;
-      margin: 0;
-      color: #333;
-    }
-
-    header {
-      background-color: #0099cc;
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    nav {
-      background: #0077aa;
-      text-align: center;
-      padding: 15px 0;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .container {
-      max-width: 700px;
-      margin: 40px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      color: #0099cc;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    button {
-      background-color: #0099cc;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      width: 100%;
-    }
-
-    .summary {
-      margin-bottom: 30px;
-      padding: 10px;
-      background: #f9f9f9;
-      border-radius: 8px;
-    }
-
-    .summary p {
-      margin: 5px 0;
-    }
-
-    .total {
-      font-weight: bold;
-      font-size: 18px;
-      margin-top: 15px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #f4f4f4;
-      margin-top: 50px;
-      font-size: 14px;
-    }
+    body { font-family: sans-serif; background: #fffef8; margin: 0; }
+    header, nav, footer { text-align: center; background: #0099cc; color: white; padding: 20px; }
+    nav { background: #0077aa; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; }
+    .container { max-width: 700px; margin: auto; padding: 20px; background: white; }
+    .summary p { margin: 5px 0; }
+    .total { font-weight: bold; font-size: 18px; margin-top: 15px; }
+    input, textarea { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
+    button { background: #0099cc; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Checkout</h1>
-    <p>Review and complete your order</p>
-  </header>
+<header><h1>Checkout</h1></header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="cart.html">Cart</a>
-    <a href="about.html">About</a>
-  </nav>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="cart.html">Cart</a>
+</nav>
 
-  <div class="container">
-    <h2>Order Summary</h2>
-    <div id="orderSummary" class="summary">Loading...</div>
+<div class="container">
+  <h2>Order Summary</h2>
+  <div class="summary" id="orderSummary">Loading...</div>
 
-    <form onsubmit="return submitOrder();">
-      <label for="customerName">Your Name</label>
-      <input type="text" id="customerName" required>
+  <form onsubmit="return submitOrder();">
+    <input type="text" id="customerName" placeholder="Your Name" required>
+    <textarea id="customerAddress" placeholder="Shipping Address" rows="3" required></textarea>
+    <input type="text" id="customerPhone" placeholder="Phone Number" required>
+    <button type="submit">Submit Order</button>
+  </form>
+</div>
 
-      <label for="customerAddress">Shipping Address</label>
-      <textarea id="customerAddress" rows="4" required></textarea>
+<footer>© 2025 Bil Shop</footer>
 
-      <label for="customerPhone">Phone Number</label>
-      <input type="text" id="customerPhone" required>
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const fromCart = urlParams.get('cart') === 'true';
+const summary = document.getElementById('orderSummary');
+let total = 0;
+let orderItems = [];
 
-      <button type="submit">Submit Order</button>
-    </form>
-  </div>
+if (fromCart) {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  if (cart.length === 0) {
+    summary.innerHTML = '<p>Your cart is empty.</p>';
+  } else {
+    let html = '';
+    cart.forEach(item => {
+      const sub = item.price * item.quantity;
+      total += sub;
+      orderItems.push(`${item.name} x${item.quantity}`);
+      html += `<p>${item.name} x${item.quantity} — $${sub.toFixed(2)}</p>`;
+    });
+    html += `<p class="total">Total: $${total.toFixed(2)}</p>`;
+    summary.innerHTML = html;
+  }
+} else {
+  summary.innerHTML = '<p>No product found.</p>';
+}
 
-  <footer>
-    🍦 Bil Shop © 2025 | 📧 bilshop@example.com | 📞 012-3456789
-  </footer>
+function submitOrder() {
+  const name = document.getElementById('customerName').value;
+  const address = document.getElementById('customerAddress').value;
+  const phone = document.getElementById('customerPhone').value;
 
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const fromCart = urlParams.get('cart') === 'true';
-    const summaryDiv = document.getElementById('orderSummary');
+  alert(`✅ Order submitted!\nName: ${name}\nItems: ${orderItems.join(', ')}\nTotal: $${total.toFixed(2)}\nAddress: ${address}\nPhone: ${phone}`);
 
-    let orderItems = [];
-    let total = 0;
-
-    if (fromCart) {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      if (cart.length === 0) {
-        summaryDiv.innerHTML = "<p>Your cart is empty.</p>";
-      } else {
-        let html = "";
-        cart.forEach(item => {
-          const subtotal = item.price * item.quantity;
-          total += subtotal;
-          orderItems.push(`${item.name} x${item.quantity}`);
-          html += `<p>${item.name} x${item.quantity} — $${subtotal.toFixed(2)}</p>`;
-        });
-        html += `<p class="total">Total: $${total.toFixed(2)}</p>`;
-        summaryDiv.innerHTML = html;
-      }
-    } else {
-      const product = urlParams.get('product') || 'Not specified';
-      const price = parseFloat(urlParams.get('price')) || 0;
-      total = price;
-      orderItems.push(`${product} x1`);
-      summaryDiv.innerHTML = `<p>${product} x1 — $${price.toFixed(2)}</p><p class="total">Total: $${price.toFixed(2)}</p>`;
-    }
-
-    function submitOrder() {
-      const name = document.getElementById('customerName').value;
-      const address = document.getElementById('customerAddress').value;
-      const phone = document.getElementById('customerPhone').value;
-
-      if (!name || !address || !phone) {
-        alert("Please fill in all fields.");
-        return false;
-      }
-
-      const message = `
-Thank you for your order, ${name}!
-
-✅ Order Details:
-Items: ${orderItems.join(', ')}
-Total Price: $${total.toFixed(2)}
-Shipping Address: ${address}
-Phone: ${phone}
-
-We will contact you shortly to confirm your delivery.
-      `;
-      alert(message);
-
-      // Clear cart if user came from it
-      if (fromCart) {
-        localStorage.removeItem('cart');
-      }
-
-      window.location.href = "index.html";
-      return false;
-    }
-  </script>
+  localStorage.removeItem('cart');
+  window.location.href = "index.html";
+  return false;
+}
+</script>
 
 </body>
 </html>
