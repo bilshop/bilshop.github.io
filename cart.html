@@ -2,180 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bil Shop - Your Cart</title>
+  <title>Cart - Bil Shop</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fffef8;
-      margin: 0;
-      color: #333;
-    }
-
-    header {
-      background-color: #0099cc;
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    nav {
-      background: #0077aa;
-      text-align: center;
-      padding: 15px 0;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 30px;
-    }
-
-    table th, table td {
-      border-bottom: 1px solid #ddd;
-      padding: 12px;
-      text-align: left;
-    }
-
-    table th {
-      background-color: #0099cc;
-      color: white;
-    }
-
-    .total {
-      text-align: right;
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
-
-    .checkout-btn {
-      display: block;
-      width: 100%;
-      background-color: #0099cc;
-      color: white;
-      padding: 15px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .empty {
-      text-align: center;
-      font-size: 18px;
-      padding: 30px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #f4f4f4;
-      margin-top: 50px;
-      font-size: 14px;
-    }
+    body { font-family: sans-serif; background: #fffef8; margin: 0; }
+    header, nav, footer { text-align: center; background: #0099cc; color: white; padding: 20px; }
+    nav { background: #0077aa; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; }
+    .container { max-width: 800px; margin: auto; padding: 20px; background: white; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+    .total { text-align: right; font-weight: bold; margin-top: 20px; }
+    button { padding: 8px 15px; background: #cc0000; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .checkout-btn { background: #0099cc; width: 100%; margin-top: 20px; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Your Cart</h1>
-    <p>Review your order before checkout</p>
-  </header>
+<header>
+  <h1>Your Cart</h1>
+</header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="cart.html">Cart</a>
-    <a href="about.html">About</a>
-  </nav>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="cart.html">Cart</a>
+</nav>
 
-  <div class="container" id="cartContainer">
-    <!-- Cart content loads here -->
-  </div>
+<div class="container" id="cartContainer">Loading cart...</div>
 
-  <footer>
-    🍦 Bil Shop © 2025 | 📧 bilshop@example.com | 📞 012-3456789
-  </footer>
+<footer>© 2025 Bil Shop</footer>
 
- <script>
-  function renderCart() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const container = document.getElementById('cartContainer');
+<script>
+function renderCart() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const container = document.getElementById('cartContainer');
 
-    if (cart.length === 0) {
-      container.innerHTML = '<div class="empty">🛒 Your cart is empty.</div>';
-      return;
-    }
-
-    let total = 0;
-    let tableHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Qty</th>
-            <th>Subtotal</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-    `;
-
-    cart.forEach((item, index) => {
-      const subtotal = item.price * item.quantity;
-      total += subtotal;
-      tableHTML += `
-        <tr>
-          <td>${item.name}</td>
-          <td>$${item.price.toFixed(2)}</td>
-          <td>${item.quantity}</td>
-          <td>$${subtotal.toFixed(2)}</td>
-          <td><button onclick="removeFromCart(${index})" style="background:#cc0000;color:white;border:none;padding:6px 10px;border-radius:5px;cursor:pointer;">🗑</button></td>
-        </tr>
-      `;
-    });
-
-    tableHTML += `
-        </tbody>
-      </table>
-      <div class="total"><strong>Total: $${total.toFixed(2)}</strong></div>
-      <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
-    `;
-
-    container.innerHTML = tableHTML;
+  if (cart.length === 0) {
+    container.innerHTML = '<p>Your cart is empty.</p>';
+    return;
   }
 
-  function removeFromCart(index) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart(); // re-render cart
-  }
+  let html = '<table><thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th><th></th></tr></thead><tbody>';
+  let total = 0;
 
-  function goToCheckout() {
-    const params = new URLSearchParams({ cart: 'true' });
-    window.location.href = 'checkout.html?' + params.toString();
-  }
+  cart.forEach((item, index) => {
+    const sub = item.price * item.quantity;
+    total += sub;
+    html += `<tr>
+      <td>${item.name}</td>
+      <td>$${item.price.toFixed(2)}</td>
+      <td>${item.quantity}</td>
+      <td>$${sub.toFixed(2)}</td>
+      <td><button onclick="removeItem(${index})">🗑</button></td>
+    </tr>`;
+  });
 
-  // Run when page loads
+  html += `</tbody></table><div class="total">Total: $${total.toFixed(2)}</div>`;
+  html += `<button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>`;
+  container.innerHTML = html;
+}
+
+function removeItem(index) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.splice(index, 1);
+  localStorage.setItem('cart', JSON.stringify(cart));
   renderCart();
+}
+
+function goToCheckout() {
+  window.location.href = 'checkout.html?cart=true';
+}
+
+renderCart();
 </script>
 
 </body>
