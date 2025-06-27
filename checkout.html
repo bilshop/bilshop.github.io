@@ -54,6 +54,12 @@ src="https://www.facebook.com/tr?id=704845828599877&ev=PageView&noscript=1"
     <button type="submit">Submit Order</button>
   </form>
 </div>
+<script>
+  fbq('trackCustom', 'StartedCheckout', {
+    total_items: 3,
+    total_price: 12.50
+  });
+</script>
 
 <footer>© 2025 Bil Shop</footer>
 
